@@ -35,8 +35,8 @@ heatmap.2(t(as.matrix(syn.data)), # We transpose the dataset to have genes as â†
           trace="none",
           distfun=function(x) as.dist(1-abs(cor(t(x)))),
           col=rev(heat.colors(32)),
-          main="Heatmap of GE data", key.title="")
-
+          main="Heatmap of GE data with 
+          Pearson method", key.title="")
 
 ### Get the correlation matrix, cluster , viualise and infere the network
 # Pearson corelation
@@ -90,4 +90,49 @@ corrplot(corKendal, type="upper", diag=FALSE,
          order="hclust", hclust.method="ward.D",
          cl.pos="n", tl.cex=0.5,
          main="Kendall correlation plot of GE data.", mar=c(0,0,1,0), 
+         cex.main=0.75)
+
+# by rising the correlation matrix to an exponent
+corExponant <- cor(syn.data)^2
+
+# 1.2.1 Thresholding the correlation matrix â€“ Infer the network.
+
+# A function to apply a threshold value on a matrix m
+matrix_threshold <- function(m, t, both = TRUE, ...) {
+  diag(m) <- 0;
+  m[m >= -t & m <= t] <-0;
+  return(m)
+}
+
+# Apply a threshold t = 0.75.
+corMT <- matrix_threshold(corM, t=0.75)
+
+options(repr.plot.width = 5, repr.plot.height = 6)
+
+# plot the network
+corrplot(corMT, tl.cex=0.5, 
+         main="Network 'adjacency' matrix", 
+         mar=c(0,0,1,0),
+         cex.main=0.75)
+
+# 1.3 - Apply 3 differents thresholds [0.6, 0.56, 0.99]
+corMT_one <- matrix_threshold(corM, t=0.6) # 0.6
+corMT_two <- matrix_threshold(corM, t=0.56) # 0.56
+corMT_third <- matrix_threshold(corM, t=0.99) # 0.99
+
+# plot all networks.
+# 0.6
+corrplot(corMT_one, tl.cex=0.5, 
+         main="Network 'adjacency' matrix", 
+         mar=c(0,0,1,0),
+         cex.main=0.75)
+# 0.56
+corrplot(corMT_two, tl.cex=0.5, 
+         main="Network 'adjacency' matrix", 
+         mar=c(0,0,1,0),
+         cex.main=0.75)
+# 0.99
+corrplot(corMT_third, tl.cex=0.5, 
+         main="Network 'adjacency' matrix", 
+         mar=c(0,0,1,0),
          cex.main=0.75)
