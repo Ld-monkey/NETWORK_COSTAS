@@ -115,9 +115,9 @@ corrplot(corMT, tl.cex=0.5,
          mar=c(0,0,1,0),
          cex.main=0.75)
 
-# 1.3 - Apply 3 differents thresholds [0.6, 0.56, 0.99]
+# 1.3 - Apply 3 differents thresholds [0.6, 0.8, 0.99]
 corMT_one <- matrix_threshold(corM, t=0.6) # 0.6
-corMT_two <- matrix_threshold(corM, t=0.56) # 0.56
+corMT_two <- matrix_threshold(corM, t=0.8) # 0.8
 corMT_third <- matrix_threshold(corM, t=0.99) # 0.99
 
 # plot all networks.
@@ -126,7 +126,7 @@ corrplot(corMT_one, tl.cex=0.5,
          main="Network 'adjacency' matrix", 
          mar=c(0,0,1,0),
          cex.main=0.75)
-# 0.56
+# 0.8
 corrplot(corMT_two, tl.cex=0.5, 
          main="Network 'adjacency' matrix", 
          mar=c(0,0,1,0),
