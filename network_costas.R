@@ -136,3 +136,24 @@ corrplot(corMT_third, tl.cex=0.5,
          main="Network 'adjacency' matrix", 
          mar=c(0,0,1,0),
          cex.main=0.75)
+
+# 1.4 Network visualisation 
+
+export_cytoscape <- function(m, filename, ...) {
+  # Function to export a correlation matrix as a cytoscape network file.
+  #if () {
+  #  stop("Pleaase specify a new file name there is not much sense in appending a network in an existing filename.")
+  #}
+  fn <- filename;
+  write("from\tto\tedgeWeight\tsign", file = fn);
+  for (i in 1:nrow(m)) {
+    for (j in i:ncol(m)) {
+      if (m[i,j] != 0) {
+        write(sprintf("%s\t%s\t%f\t%s", colnames(m)[i], rownames(m)[j], abs(m[i,j]), sign(m[i,j])), file = fn, append = TRUE);
+      }
+    }
+  }
+}
+
+#export 3 files
+export_cytoscape()
