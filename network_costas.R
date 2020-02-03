@@ -155,7 +155,8 @@ export_cytoscape <- function(m, filename, ...) {
   }
 }
 
-#export 3 files
-export_cytoscape(corMT_one, "results/corMT_one.xls") # 0.6
-export_cytoscape(corMT_two, "results/corMT_two.xls") # 0.80
-export_cytoscape(corMT_third, "results/corMT_third.xls") # 0.99
+# 1-4 export 3 files
+export_cytoscape(corMT_one, "results/corMT_one.tsv") # 0.6
+export_cytoscape(corMT_two, "results/corMT_two.tsv") # 0.80
+export_cytoscape(corMT_third, "results/corMT_third.tsv") # 0.99
+
