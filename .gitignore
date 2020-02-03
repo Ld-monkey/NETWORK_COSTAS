@@ -1,5 +1,6 @@
 #pdf ignore.
 *.pdf
 
-# R history
+# R history and data.
 *.Rhistory
+*.RData
