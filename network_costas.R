@@ -119,6 +119,8 @@ corrplot(corMT, tl.cex=0.5,
 corMT_one <- matrix_threshold(corM, t=0.6) # 0.6
 corMT_two <- matrix_threshold(corM, t=0.8) # 0.8
 corMT_third <- matrix_threshold(corM, t=0.99) # 0.99
+corMT_quatre <- matrix_threshold(corM, t=0.75) # 0.75
+
 
 # plot all networks.
 # 0.6
@@ -159,4 +161,18 @@ export_cytoscape <- function(m, filename, ...) {
 export_cytoscape(corMT_one, "results/corMT_one.tsv") # 0.6
 export_cytoscape(corMT_two, "results/corMT_two.tsv") # 0.80
 export_cytoscape(corMT_third, "results/corMT_third.tsv") # 0.99
+export_cytoscape(corMT_quatre, "results/corMT_quatre.tsv") #0.75
 
+# --------------------- Part 2 ---------------------
+library("minet")
+
+# CLR method
+clr.net <- minet(syn.data, method = "clr",
+                 estimator = "mi.empirical", disc = "equalfreq")
+
+# ARACNE method
+ara.net <- minet(syn.data, method = "aracne")
+
+# 2-1 - export network
+export_cytoscape(clr.net, "results/clr_method.tsv")
+export_cytoscape(ara.net, "results/ara_method.tsv")
